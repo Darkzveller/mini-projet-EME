@@ -1,0 +1,7 @@
+Les niveaux de priorité des interruptions sont généralement configurables entre une plage de valeurs (par exemple, de 0 à 15 sur de nombreux microcontrôleurs STM32), où :
+
+0 représente la plus haute priorité .
+15 représente la plus faible priorité.
+Configuration de la priorité d'interruption :
+En Mbed, vous pouvez configurer la priorité des interruptions matérielles en utilisant la fonction NVIC_SetPriority() de la bibliothèque CMSIS (qui est la bibliothèque bas niveau pour STM32, par exemple).
+

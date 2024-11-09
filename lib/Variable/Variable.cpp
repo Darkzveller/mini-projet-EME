@@ -6,8 +6,9 @@ AnalogIn analog_alim(PB_1);
 AnalogIn analog_hall_effect(PA_1);
 
 DigitalIn digital_encoder(PF_1);
+ 
 
-double coefficient_milli = 1000;
+double coefficient_milli = 1;
 //*********Consommation electrique */
 // Pont diviseur de tension
 double Vbat = 0;
@@ -24,5 +25,12 @@ double conso_energie = 0;
 
 // Encoder
 double vitesse = 0;
+double dist = 0;
 double dist_prec = 0;
 long double val_tick = 0;
+
+
+//*********Interruption */
+//Interruption de l'instrumentation
+volatile bool flag_interruption = false;
+
