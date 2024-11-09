@@ -39,7 +39,8 @@ void encoder()
 #ifdef encoder_observation
 
     printf("val tick %d ", (int)val_tick);
-// printf("vitesse %d ", (int)vitesse);
+printf("vitesse %d ", (int)vitesse);printf("dist %d ", (int)dist);
+
 #endif
 }
 
