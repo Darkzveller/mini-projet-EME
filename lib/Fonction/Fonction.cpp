@@ -1,29 +1,5 @@
 #include "Variable.h"
-#include "Fonction.h" /*
-void adapte_print_double(double nombre)
-{
-    int32_t partie_gauche = (int32_t)nombre;
-
-    int32_t partie_droite = (int32_t)round((nombre - partie_gauche) * 10000.0);
-
-    printf("%d.%d", partie_gauche, partie_droite);
-}
-*/
-void adapte_print_double(double nombre)
-{
-    float coeff = 1000.0;
-    int32_t partie_gauche = (int32_t)nombre; 
-    int16_t partie_droite = (int16_t)((nombre - partie_gauche) * coeff); 
-
-    printf("%d.", partie_gauche);
-
-    if (partie_droite < (coeff / 10.0))
-    {
-        printf("0");
-    }
-    printf("%d", partie_droite);
-}
-
+#include "Fonction.h"
 void tension_batterie()
 {
     Vbat = analog_alim.read();
@@ -98,4 +74,33 @@ void grandeur_calculer()
     adapte_print_double(conso_energie);
 
 #endif
+}
+
+void delay(float time)
+{
+    ThisThread::sleep_for(time);
+} 
+/*
+ void adapte_print_double(double nombre)
+ {
+     int32_t partie_gauche = (int32_t)nombre;
+
+     int32_t partie_droite = (int32_t)round((nombre - partie_gauche) * 10000.0);
+
+     printf("%d.%d", partie_gauche, partie_droite);
+ }
+ */
+void adapte_print_double(double nombre)
+{
+    float coeff = 1000.0;
+    int32_t partie_gauche = (int32_t)nombre;
+    int16_t partie_droite = (int16_t)((nombre - partie_gauche) * coeff);
+
+    printf("%d.", partie_gauche);
+
+    if (partie_droite < (coeff / 10.0))
+    {
+        printf("0");
+    }
+    printf("%d", partie_droite);
 }

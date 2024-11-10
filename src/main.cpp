@@ -6,17 +6,15 @@
 
 DigitalOut led1(LED1); // LED pour l'interruption 1
 
-// Déclaration des objets Ticker pour générer des interruptions périodiques
+// Déclaration des objets Ticker pour générer des interruptions périodiques comme des taches
 Ticker t1;
 Ticker t2;
-// Fonction d'interruption pour le premier timer (Ticker)
-void interrupt_1()
+void controle()
 {
-    led1 = !led1; // Toggle de la LED1
-    flag_interrupt_1 = true;
+    led1 = !led1; 
+    flag_controle = true;
 }
 
-// Fonction d'interruption pour le second timer (Ticker)
 void instrumentation()
 {
     flag_interruption = true;
@@ -25,30 +23,27 @@ int main()
 {
     printf("Mini-projet-Initialiser \n");
 
-    t1.attach(&interrupt_1, 1.0);
+    t1.attach(&controle, 1.0);
 
     t2.attach(&instrumentation, Te);
-    printf("Initialisation des Timer effectuer\n");
+    printf("Initialisation des tache effectuer\n");
 
-    // Boucle principale
     while (true)
     {
-        // ThisThread::sleep_for(500ms);
 
         if (flag_interruption)
         {
 
             grandeur_calculer();
-            printf("\n");
+            // printf("\n");
 
-            // printf("interruption");
             flag_interruption = false;
         }
-        if (flag_interrupt_1)
+        if (flag_controle)
         {
 
             // printf("LED");
-            flag_interrupt_1 = false;
+            flag_controle = false;
         }
     }
 }
