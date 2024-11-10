@@ -33,4 +33,4 @@ long double val_tick = 0;
 //*********Interruption */
 //Interruption de l'instrumentation
 volatile bool flag_interruption = false;
-
+volatile bool flag_interrupt_1 = false;

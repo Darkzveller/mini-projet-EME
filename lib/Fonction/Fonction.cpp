@@ -1,5 +1,28 @@
 #include "Variable.h"
-#include "Fonction.h"
+#include "Fonction.h" /*
+void adapte_print_double(double nombre)
+{
+    int32_t partie_gauche = (int32_t)nombre;
+
+    int32_t partie_droite = (int32_t)round((nombre - partie_gauche) * 10000.0);
+
+    printf("%d.%d", partie_gauche, partie_droite);
+}
+*/
+void adapte_print_double(double nombre)
+{
+    float coeff = 1000.0;
+    int32_t partie_gauche = (int32_t)nombre; 
+    int16_t partie_droite = (int16_t)((nombre - partie_gauche) * coeff); 
+
+    printf("%d.", partie_gauche);
+
+    if (partie_droite < (coeff / 10.0))
+    {
+        printf("0");
+    }
+    printf("%d", partie_droite);
+}
 
 void tension_batterie()
 {
@@ -8,7 +31,9 @@ void tension_batterie()
     Vbat = Vbat * 57.6 / 3.34;
     Vbat = Vbat; // Pour l'avoir en mV
 #ifdef Vbat_observation
-    printf(" Vbat %.5d V ", (int)Vbat);
+    printf(" Vbat ");
+    adapte_print_double(Vbat);
+
 #endif
 }
 
@@ -20,11 +45,13 @@ void capteur_effet_hall()
     double IPN = 50;
     double Vref = 2.5;
 
-    current_ask = (Voutput * IPN) / (coeff * Vref);
+    current_ask = ((Voutput * IPN) / (coeff * Vref)) / 1000;
 #ifdef Current_observation
-    printf("Voutput = %.5d mV ", (int)Voutput * 10);
-    printf("Voutput = %.5d mV ", (int)Voutput);
-    printf("current ask %.5d mA ", (int)current_ask);
+    printf(" Voutput =  ");
+    adapte_print_double(Voutput);
+    printf(" current ask ");
+    adapte_print_double(current_ask);
+
 #endif
 }
 
@@ -38,8 +65,14 @@ void encoder()
     dist_prec = dist;
 #ifdef encoder_observation
 
-    printf("val tick %d ", (int)val_tick);
-printf("vitesse %d ", (int)vitesse);printf("dist %d ", (int)dist);
+    printf(" val tick ");
+    adapte_print_double(val_tick);
+
+    printf(" vitesse ");
+    adapte_print_double(vitesse);
+
+    printf(" dist ");
+    adapte_print_double(dist);
 
 #endif
 }
@@ -54,10 +87,15 @@ void grandeur_calculer()
     energie_bat += (puissance_bat * Te) / 3600;
     conso_energie = energie_bat / dist;
 #ifdef Power_Joule_observation
-    printf("puissance_bat %d mW ", (int)(puissance_bat));
-    printf("energie_bat %d mWh ", (int)energie_bat);
-    printf("conso_energie %d  ", (int)conso_energie);
+    // printf(" puissance_bat %d  mW", (int)(puissance_bat * 1000));
+    // printf(" energie_bat %d ", (int)(energie_bat*1000));
+    // printf(" conso_energie %d  ", (int)(conso_energie));
+    printf(" puissance_bat ");
+    adapte_print_double(puissance_bat);
+    printf(" energie_bat ");
+    adapte_print_double(energie_bat);
+    printf(" conso_energie ");
+    adapte_print_double(conso_energie);
 
 #endif
 }
-

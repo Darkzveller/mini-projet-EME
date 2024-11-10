@@ -14,7 +14,7 @@ extern AnalogIn analog_hall_effect;
 extern DigitalIn digital_encoder;
 
 // Parametre interruption
-#define Te 5
+#define Te 1
 extern double coefficient_milli;
 
 //*********Consommation electrique */
@@ -40,7 +40,8 @@ extern double dist;
 extern double dist_prec;
 extern long double val_tick;
 //*********Interruption */
-//Interruption de l'instrumentation
+// Interruption de l'instrumentation
 extern volatile bool flag_interruption;
 
+extern volatile bool flag_interrupt_1;
 #endif
